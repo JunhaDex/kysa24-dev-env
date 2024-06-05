@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  redis:
+    build:
+      context: .
+      dockerfile: ./storage/redis/build/Dockerfile
+    container_name: redis
+    ports:
+      - "16379:16379"
+    volumes:
+      - ./storage/redis/data:/data
+
+  mysql:
+    build:
+      context: .
+      dockerfile: ./storage/mysql/build/Dockerfile
+    container_name: mysql
+    ports:
+      - "13306:13306"
+    volumes:
+      - ./storage/mysql/data:/var/lib/mysql
