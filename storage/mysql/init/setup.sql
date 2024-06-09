@@ -7,7 +7,10 @@ create table if not exists team
     team_name  varchar(255)                        not null,
     leader     int unsigned                        not null comment 'fk user',
     created_at timestamp default CURRENT_TIMESTAMP not null,
-    updated_at datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP
+    updated_at datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    constraint team_name_unique
+        unique (team_name)
+#     team_user_fk leader - after user table
 );
 create table status_user_act
 (
@@ -36,7 +39,7 @@ create table if not exists user
     cover_img   varchar(255)                           null comment 'url',
     introduce   varchar(255) default ''                null,
     geo         varchar(255) default ''                null,
-    act_status  int unsigned default '1'               not null comment 'fk status_act',
+    act_status  int unsigned default '2'               not null comment 'fk status_user_act',
     created_at  timestamp    default CURRENT_TIMESTAMP not null,
     updated_at  datetime     default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
     constraint auth_id_unique
@@ -59,6 +62,8 @@ create table if not exists user_device
     last_login datetime                            null,
     created_at timestamp default CURRENT_TIMESTAMP not null,
     updated_at datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    constraint user_device_fcm_unique
+        unique (fcm, user_id),
     constraint user_device_user_fk
         foreign key (user_id) references user (id)
 );
@@ -90,6 +95,8 @@ create table if not exists `group`
     updated_at  datetime         default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
     constraint group_ref_unique
         unique (ref),
+    constraint group_name_unique
+        unique (group_name),
     constraint group_user_fk
         foreign key (creator) references user (id)
 );
@@ -114,7 +121,7 @@ create table if not exists post
 (
     id         int unsigned auto_increment
         primary key,
-    author     int unsigned                        null comment 'fk user',
+    author     int unsigned                        not null comment 'fk user',
     image      varchar(255)                        null,
     message    text                                not null,
     group_id   int unsigned                        not null comment 'fk group',
