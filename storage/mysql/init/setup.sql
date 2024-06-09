@@ -1,5 +1,16 @@
 create database if not exists service;
 use service;
+create table if not exists admin
+(
+    id         int unsigned auto_increment
+        primary key,
+    login_id   varchar(255)                        not null,
+    pwd        varchar(255)                        not null comment 'password',
+    name       varchar(255)                        not null,
+    created_at timestamp default CURRENT_TIMESTAMP not null,
+    constraint login_id_unique
+        unique (login_id)
+);
 create table if not exists team
 (
     id         int unsigned auto_increment
