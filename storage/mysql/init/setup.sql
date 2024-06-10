@@ -234,3 +234,7 @@ INSERT INTO service.status_user_act (level, status_name, status_desc)
 VALUES (3, 'block_group', 'block user create group');
 INSERT INTO service.status_user_act (level, status_name, status_desc)
 VALUES (4, 'block_chat', 'block user all chat');
+# default admin
+INSERT INTO service.admin (login_id, pwd, name)
+VALUES ('admin', '$2b$10$s/obbu1GAwvoYeff0jS2.eZ/NAsXwuLJUVgddScVeAPiefnCIiUbq', 'admin');
+
