@@ -16,7 +16,7 @@ create table if not exists team
     id         int unsigned auto_increment
         primary key,
     team_name  varchar(255)                        not null,
-    leader     int unsigned                        not null comment 'fk user',
+    leader     int unsigned                        null comment 'fk user',
     created_at timestamp default CURRENT_TIMESTAMP not null,
     updated_at datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
     constraint team_name_unique
