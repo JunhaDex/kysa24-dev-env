@@ -9,3 +9,9 @@
 5. all user must be assigned to the announcement group and support mandatory.
 6. lost and found group first be added, then user can unsubscribe from it.
 7. all other members of announcement group should be reader only.
+
+## Progress
+
+```shell
+find . -name '*.ts' ! -path '*node_modules*' ! -name '*.spec.ts' | xargs wc -l
+```

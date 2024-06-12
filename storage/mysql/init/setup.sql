@@ -167,6 +167,8 @@ create table if not exists post_like
     created_at timestamp default CURRENT_TIMESTAMP not null,
     updated_at datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
     deleted_at datetime                            null,
+    constraint post_like_author_post_unique
+        unique (author, post_id),
     constraint post_like_post_fk
         foreign key (post_id) references post (id),
     constraint post_like_user_fk
