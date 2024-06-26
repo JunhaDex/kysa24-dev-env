@@ -78,16 +78,14 @@ create table if not exists user_device
     constraint user_device_user_fk
         foreign key (user_id) references user (id)
 );
-create table if not exists user_user_follow
+create table if not exists user_user_ticket
 (
     id         int unsigned auto_increment
         primary key,
     user_id    int unsigned                        not null comment 'fk user',
-    follower   int unsigned                        not null comment 'fk user',
+    recipient  int unsigned                        not null,
     created_at timestamp default CURRENT_TIMESTAMP not null,
     updated_at datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
-    constraint user_user_follow_unique
-        unique (user_id, follower),
     constraint user_user_follow_user_fk
         foreign key (user_id) references user (id)
 );
@@ -102,6 +100,7 @@ create table if not exists `group`
     cover_img   varchar(255)                               null comment 'url',
     introduce   varchar(255)     default ''                null,
     is_show     tinyint unsigned default '1'               not null comment '0: hide 1: show',
+    priority    int unsigned     default '0'               not null comment 'default 0 DESC',
     created_at  timestamp        default CURRENT_TIMESTAMP not null,
     updated_at  datetime         default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
     constraint group_ref_unique
@@ -179,7 +178,7 @@ create table if not exists chat_room
     id         int unsigned auto_increment
         primary key,
     ref        varchar(36)                         not null comment 'uuidv4',
-    members    json                                not null,
+    members    json                                not null comment 'list of user ref',
     created_at timestamp default CURRENT_TIMESTAMP not null,
     updated_at datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
     constraint chat_room_ref_unique
@@ -212,17 +211,22 @@ create table if not exists noti
     constraint noti_user_fk
         foreign key (target) references user (id)
 );
-create table if not exists user_user_chat_hide
+
+create table if not exists chat_room_view
 (
-    id         int unsigned auto_increment
-        primary key,
-    user_id    int unsigned                        not null comment 'fk user',
-    blocker    int unsigned                        not null comment 'fk user',
-    created_at timestamp default CURRENT_TIMESTAMP not null,
-    updated_at datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
-    constraint user_user_chat_hide_unique
-        unique (user_id, blocker),
-    constraint user_user_chat_hide_user_fk
+    id         int unsigned auto_increment,
+    user_id    int unsigned                               not null,
+    room_id    int unsigned                               not null,
+    title      varchar(255)                               not null comment 'char room title',
+    is_block   tinyint unsigned default 0                 not null,
+    last_read  int unsigned     default 0                 not null comment 'chat fk cache last read',
+    created_at timestamp        default CURRENT_TIMESTAMP not null,
+    updated_at datetime         default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    constraint chat_room_view_pk
+        primary key (id),
+    constraint chat_room_view_room_fk
+        foreign key (room_id) references chat_room (id),
+    constraint chat_room_view_user_fk
         foreign key (user_id) references user (id)
 );
 
@@ -239,4 +243,9 @@ VALUES (4, 'block_chat', 'block user all chat');
 # default admin
 INSERT INTO service.admin (login_id, pwd, name)
 VALUES ('admin', '$2b$10$s/obbu1GAwvoYeff0jS2.eZ/NAsXwuLJUVgddScVeAPiefnCIiUbq', 'admin');
+# default post id and user id
+ALTER TABLE service.user
+    AUTO_INCREMENT = 10001;
+ALTER TABLE service.post
+    AUTO_INCREMENT = 1001;
 
