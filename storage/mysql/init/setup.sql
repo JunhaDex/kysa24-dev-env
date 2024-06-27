@@ -188,11 +188,12 @@ create table if not exists chat
 (
     id         int unsigned auto_increment
         primary key,
-    room_id    int unsigned                        not null comment 'fk chat_room',
-    sender     int unsigned                        not null comment 'fk user',
-    message    text                                not null,
-    created_at timestamp default CURRENT_TIMESTAMP not null,
-    updated_at datetime  default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    room_id    int unsigned                               not null comment 'fk chat_room',
+    sender     int unsigned                               not null comment 'fk user',
+    message    text                                       not null,
+    encoded    tinyint unsigned default 0                 not null comment '0: plain 1: encoded',
+    created_at timestamp        default CURRENT_TIMESTAMP not null,
+    updated_at datetime         default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
     constraint chat_chat_room_fk
         foreign key (room_id) references chat_room (id),
     constraint chat_user_fk
