@@ -15,3 +15,7 @@
 ```shell
 find . -name '*.ts' ! -path '*node_modules*' ! -name '*.spec.ts' | xargs wc -l
 ```
+
+mysql default modes
+sql_mode=STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+"ONLY_FULL_GROUP_BY" -> remove only this
