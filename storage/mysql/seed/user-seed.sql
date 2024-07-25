@@ -17,6 +17,16 @@ VALUES (10001, '7d79e3ee-c81f-4743-861c-c336bbc780ad', '김민지', 2, 20, '2004
        (10008, 'b31c6185-9d35-451e-b5fd-e740d60c2765', '이소연', 2, 25, '1999-01-01 00:00:00', '소연닉', 'lee.soyeon',
         '$2b$10$6ra8OeiwWPaxTeFs2.QNl.czN3KLMOwo3.taLT3IBpA7Ksu6ffndS', 16, '', '', '', '광주 서구', 1);
 
+INSERT INTO service.user_info (user_id, extra_info)
+VALUES (10001, '{}'),
+       (10002, '{}'),
+       (10003, '{}'),
+       (10004, '{}'),
+       (10005, '{}'),
+       (10006, '{}'),
+       (10007, '{}'),
+       (10008, '{}');
+
 INSERT INTO service.`group` (ref, creator, group_name, profile_img, cover_img, introduce, is_show, priority)
 VALUES ('914db4c6-fd60-4887-adb2-59939950e0f1', 10001, '전체공지 그룹', null, null, '전체공지 그룹입니다.', 1, 1),
        ('12f5a04f-9ea5-4e04-b226-0476955750ef', 10001, 'Lost and Found', null, null, 'Find what you have lost!', 0, 0),

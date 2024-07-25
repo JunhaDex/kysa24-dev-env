@@ -60,6 +60,18 @@ create table if not exists user
     constraint user_user_team_fk
         foreign key (team_id) references team (id)
 );
+
+create table user_info
+(
+    id         int unsigned auto_increment
+        primary key,
+    user_id    int unsigned                        not null,
+    extra_info json                                not null,
+    created_at timestamp default CURRENT_TIMESTAMP not null,
+    constraint user_info_user_fk
+        foreign key (user_id) references user (id)
+);
+
 alter table team
     add constraint team_user_fk
         foreign key (leader) references user (id);
