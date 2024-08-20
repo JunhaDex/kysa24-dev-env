@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "kysa24-sns"
+  },
+  "targets": {
+    "kysa24-sns": {
+      "hosting": {
+        "docs-proxy": [
+          "kysa24-docs-proxy"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "target": "docs-proxy",
+    "rewrites": [
+      {
+        "source": "**",
+        "run": {
+          "serviceId": "kysa24-docs-proxy",
+          "region": "asia-northeast3"
+        }
+      }
+    ]
+  }
+}
