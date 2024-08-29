@@ -1,6 +1,8 @@
 ALTER TABLE service.team
     AUTO_INCREMENT = 1;
 INSERT INTO service.team (team_name, leader)
+VALUES ('운영위', null);
+INSERT INTO service.team (team_name, leader)
 VALUES ('1조', null);
 INSERT INTO service.team (team_name, leader)
 VALUES ('2조', null);
@@ -60,3 +62,5 @@ INSERT INTO service.team (team_name, leader)
 VALUES ('29조', null);
 INSERT INTO service.team (team_name, leader)
 VALUES ('30조', null);
+INSERT INTO service.team (team_name, leader)
+VALUES ('31조', null);
